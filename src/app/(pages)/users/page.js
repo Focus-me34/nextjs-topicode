@@ -3,10 +3,12 @@
 import { useGetUsersQuery } from "@/redux/services/userApi";
 import { decrement, increment, reset } from "@/redux/features/counterSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const count = useSelector((state) => state.counterReducer.value);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { isLoading, isFetching, data, error } = useGetUsersQuery(null);
 
@@ -38,6 +40,7 @@ export default function Home() {
         >
           {data.map((user) => (
             <div
+              onClick={() => router.push(`/users/${user.id}`)}
               key={user.id}
               style={{ border: "1px solid #ccc", textAlign: "center" }}
             >
