@@ -1,61 +1,68 @@
-"use client";;
+"use client";
 
-import { useGetUserByIdQuery } from "@/redux/services/userApi";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleUser } from "@/redux/features/userSlice";
 
 const UserShow = ({ params }) => {
+  const dispatch = useDispatch();
 
-  const { isLoading, isFetching, data, error } = useGetUserByIdQuery({ id: params.userId });
+  // ! USER SLICE DATA
+  const { userToShow, status, error } = useSelector((state) => state.userReducer);
 
-  console.log(isLoading, isFetching);
+  console.log(params);
+  // ! GETTING SINGLE USER
+  useEffect(() => {
+    dispatch(fetchSingleUser(params.userId))
+  }, []);
 
   return (
-    <div>
-      {error && <p>An error occured...</p>}
-      {isLoading || isFetching && <p>Loading...</p>}
-
-      {data && (
+    <>
+      {status === "loading" && <p>Loading...</p>}
+      {status === "failed" && <p>{error}</p>}
+      {status === "succeeded" && userToShow && (
         <div
-          key={data.id}
+          key={userToShow.id}
           style={{ border: "1px solid #ccc", textAlign: "center" }}
         >
           <img
-            src={`https://robohash.org/${data.id}?set=set2&size=180x180`}
-            alt={data.name}
+            src={`https://robohash.org/${userToShow.id}?set=set2&size=180x180`}
+            alt={userToShow.name}
             style={{ height: 180, width: 180 }}
           />
 
-          <h3>{data.name}</h3>
+          <h3>{userToShow.name}</h3>
           <br />
           <br />
 
           <h4>Account details</h4>
-          <p>Username: {data.username}</p>
-          <p>Email: {data.email}</p>
+          <p>Username: {userToShow.username}</p>
+          <p>Email: {userToShow.email}</p>
           <br />
 
           <h4>Address</h4>
-          <p>Street: {data.address.street}</p>
-          <p>Suite: {data.address.suite}</p>
-          <p>City: {data.address.city}</p>
-          <p>Zipcode: {data.address.zipcode}</p>
+          <p>Street: {userToShow.address.street}</p>
+          <p>Suite: {userToShow.address.suite}</p>
+          <p>City: {userToShow.address.city}</p>
+          <p>Zipcode: {userToShow.address.zipcode}</p>
           <br />
 
           <h4>Geo</h4>
-          <p>Lat: {data.address.geo.lat}</p>
-          <p>Lng: {data.address.geo.lng}</p>
+          <p>Lat: {userToShow.address.geo.lat}</p>
+          <p>Lng: {userToShow.address.geo.lng}</p>
           <br />
 
-          <h4>Phone: {data.phone}</h4>
-          <h4>Website: {data.website}</h4>
+          <h4>Phone: {userToShow.phone}</h4>
+          <h4>Website: {userToShow.website}</h4>
           <br />
 
           <h4>Company</h4>
-          <p>Name: {data.company.name}</p>
-          <p>Catchphrase: {data.company.catchPhrase}</p>
-          <p>BS: {data.company.bs}</p>
+          <p>Name: {userToShow.company.name}</p>
+          <p>Catchphrase: {userToShow.company.catchPhrase}</p>
+          <p>BS: {userToShow.company.bs}</p>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
