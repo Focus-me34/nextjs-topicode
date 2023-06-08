@@ -1,7 +1,12 @@
+"use client"; // ! DO I REALLY NEED THAT? NOT SURE AT ALL
+
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllUsers } from '@/redux/features/userSlice';
+import { useEffect } from 'react';
 
-export default function Home() {
+const Home = () => {
   return (
    <div>
     <h1>TOPICODE - HOMEPAGE</h1>
@@ -10,3 +15,5 @@ export default function Home() {
    </div>
   )
 }
+
+export default Home;
