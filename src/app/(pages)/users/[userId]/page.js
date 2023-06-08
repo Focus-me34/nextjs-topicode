@@ -1,26 +1,35 @@
-"use client";
+// "use client";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleUser } from "@/redux/features/userSlice";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchSingleUser } from "@/redux/features/userSlice";
 
-const UserShow = ({ params }) => {
-  const dispatch = useDispatch();
+async function getUserDeata (userId) {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  const data = await response.json();
+  return data;
+}
+
+const UserShow = async ({ params }) => {
+  const userToShow = await getUserDeata(params.userId);
+  console.log(userToShow);
+  // const dispatch = useDispatch();
 
   // ! USER SLICE DATA
-  const { userToShow, status, error } = useSelector((state) => state.userReducer);
+  // const { userToShow, status, error } = useSelector((state) => state.userReducer);
 
   console.log(params);
   // ! GETTING SINGLE USER
-  useEffect(() => {
-    dispatch(fetchSingleUser(params.userId))
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchSingleUser(params.userId))
+  // }, []);
 
   return (
     <>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "failed" && <p>{error}</p>}
-      {status === "succeeded" && userToShow && (
+      {/* {status === "loading" && <p>Loading...</p>} */}
+      {/* {status === "failed" && <p>{error}</p>} */}
+      {/* {status === "succeeded" &&  */}
+      {userToShow && (
         <div
           key={userToShow.id}
           style={{ border: "1px solid #ccc", textAlign: "center" }}
