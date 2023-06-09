@@ -1,30 +1,19 @@
-// "use client";
+import getIndexData from "@firebase/firestore/getIndexData";
+import TopicShow from "./Topic";
 
-import getIndexData from "../../../../firebase/firestore/getIndexData";
-// import getIndexData from "@/firebase/firestore/getIndexData";
+
 
 const Topics = async () => {
-
-  const topics = await getIndexData("topics").then((res) => {
-    return res.data;
-  }).catch((err) => {
-    console.log(err)
-  });
-
-  console.log(topics);
+  const { results, error, data } = await getIndexData("topics");
 
   return (
     <div>
       <h2>All topics</h2>
 
-      {topics?.map((topic) => {
+      {error && <p>{error}</p>}
+      {data && data.map((topic) => {
         return (
-          <div key={topic.id}>
-            <h3>{topic.name}</h3>
-            <p>{topic.type}</p>
-            <p>{topic.difficulty}</p>
-            <br />
-          </div>
+          <TopicShow topic={topic}/>
         );
       })}
     </div>
