@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "dotenv": "^16.1.4",
+    "firebase": "^9.22.2",
     "next": "13.4.4",
     "next-redux-wrapper": "^8.1.0",
     "node": "^20.2.0",
