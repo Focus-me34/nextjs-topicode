@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Link from "next/link";
 
 const Navbar = () => {
@@ -5,7 +7,12 @@ const Navbar = () => {
   return (
     <nav>
       <div className="logo">
-        <h2>My Blog</h2>
+        <Image
+          src="/LOGOAZED.png"
+          alt="logo"
+          width={300}
+          height={100}
+        />
       </div>
 
       <Link href="/">Home</Link>
