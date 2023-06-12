@@ -12,6 +12,7 @@ const Navbar = () => {
       <Link href="/about">About</Link>
       <Link href="/topics">All Topics</Link>
       <Link href="/users">Users</Link>
+      <Link href="/counter">Redux Counter</Link>
     </nav>
   );
 };

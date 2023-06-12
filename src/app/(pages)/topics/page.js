@@ -1,9 +1,21 @@
-const Topics = () => {
+import getIndexData from "@firebase/firestore/getIndexData";
+import TopicShow from "./Topic";
+
+
+
+const Topics = async () => {
+  const { results, error, data } = await getIndexData("topics");
+
   return (
     <div>
       <h2>All topics</h2>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi dolor ex laborum neque dolore rerum consectetur nam quas accusantium qui expedita ipsam, incidunt numquam maiores quo? Minima corrupti magni natus!</p>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi dolor ex laborum neque dolore rerum consectetur nam quas accusantium qui expedita ipsam, incidunt numquam maiores quo? Minima corrupti magni natus!</p>
+
+      {error && <p>{error}</p>}
+      {data && data.map((topic) => {
+        return (
+          <TopicShow topic={topic}/>
+        );
+      })}
     </div>
   );
 }

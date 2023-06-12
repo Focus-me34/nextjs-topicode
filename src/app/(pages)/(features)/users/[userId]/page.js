@@ -1,13 +1,13 @@
 // ! =======================================
 // ! USING SERVER SIDE RENDERING
-async function getUserDeata (userId) {
+async function getUserData (userId) {
   const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
   const data = await response.json();
   return data;
 }
 
 const UserShow = async ({ params }) => {
-  const userToShow = await getUserDeata(params.userId);
+  const userToShow = await getUserData(params.userId);
 
   return (
     <>
