@@ -1,5 +1,3 @@
-import Head from "next/head";
-
 export const metadata = {
   title: "About page",
   description: "About page",
