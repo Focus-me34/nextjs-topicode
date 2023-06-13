@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import addData from "@firebase/firestore/addData";
 
 const NewSubjectForm = ({ topicId }) => {
@@ -9,12 +9,21 @@ const NewSubjectForm = ({ topicId }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
-  console.log(topicId);
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
+  const [metaKeywords, setMetaKeywords] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const formData = { title, description, category, topic: topicId };
-    // console.log(formData);
+    const formData = {
+      title,
+      description,
+      category,
+      topic: topicId,
+      meta_title: metaTitle,
+      meta_description: metaDescription,
+      meta_keywords: metaKeywords
+    };
 
     addData("subjects", formData);
     setShowForm(false);
@@ -42,6 +51,20 @@ const NewSubjectForm = ({ topicId }) => {
           {/* // ! DESCRIPTION */}
           <label htmlFor="description">Description</label>
           <textarea onChange={(e) => setDescription(e.target.value)} name="description" id="description" cols="30" rows="5" placeholder="Description" required />
+
+          <hr /><br />
+          {/* // ! META TAGS */}
+          {/* // TODO: META TITLE */}
+          <label htmlFor="meta_title">Meta Title</label>
+          <input style={{ borderColor: "blue" }} onChange={(e) => setMetaTitle(e.target.value)} name="meta_title" id="meta_title" placeholder="Meta title" required />
+
+          {/* // TODO: META DESCRIPTION */}
+          <label htmlFor="meta_description">Meta Description</label>
+          <input style={{ borderColor: "blue" }} onChange={(e) => setMetaDescription(e.target.value)} name="meta_description" id="meta_description" placeholder="Meta description" required />
+
+          {/* // TODO: META KEYWORDS */}
+          <label htmlFor="meta_keywords">Meta Keywords</label>
+          <input style={{ borderColor: "blue" }} onChange={(e) => setMetaKeywords(e.target.value)} name="meta_keywords" id="meta_keywords" placeholder="Meta description" required />
 
           {/* // ! SUBMIT BUTTON */}
           <button type="submit" className="submit-button">Submit</button>

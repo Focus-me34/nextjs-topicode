@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import { subjectCollectionRef } from "@firebase/firebase_config";
 import { onSnapshot } from "firebase/firestore";
+import Link from "next/link";
 
 import NewSubjectForm from "./NewSubjectForm";
 import deleteData from "@firebase/firestore/deleteData";
@@ -52,12 +53,19 @@ const Subjects = ({ params }) => {
       {allSubjects && subjectsFilteredByTopic.map((subject) => {
         return (
           <div key={subject.id} style={{ borderBottom: "5px solid white" }}>
-            <h2>{subject.title}</h2>
+            <h2>
+              <Link href={`/topics/${params.topicId}/${subject.id}`} >
+                {subject.title}
+              </Link>
+            </h2>
             <span>{subject.category}</span>
             <p>{subject.description}</p>
 
             {/* <DeleteSubjectButton subjectId={subject.id} /> */}
-            <button onClick={() => deleteSubjectHandler(subject.id)} className="delete-button">
+            <button
+              onClick={() => deleteSubjectHandler(subject.id)}
+              className="delete-button"
+            >
               Delete
             </button>
           </div>

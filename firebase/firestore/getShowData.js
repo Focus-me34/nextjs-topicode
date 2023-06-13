@@ -6,7 +6,7 @@ export default async function getShowData(collection, id) {
   let error = null;
   let data = null;
 
-  const docRef = doc(firebase_db, "cities", id);
+  const docRef = doc(firebase_db, collection, id);
 
   try {
     result = await getDoc(docRef);

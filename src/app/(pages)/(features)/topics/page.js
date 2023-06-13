@@ -1,8 +1,6 @@
 import getIndexData from "@firebase/firestore/getIndexData";
 import TopicShow from "./Topic";
 
-
-
 const Topics = async () => {
   const { results, error, data } = await getIndexData("topics");
 
