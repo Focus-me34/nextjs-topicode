@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // ! =======================================
 // ! USING SERVER SIDE RENDERING
 async function getUserData (userId) {
@@ -16,10 +18,11 @@ const UserShow = async ({ params }) => {
           key={userToShow.id}
           style={{ border: "1px solid #ccc", textAlign: "center" }}
         >
-          <img
+          <Image
             src={`https://robohash.org/${userToShow.id}?set=set2&size=180x180`}
+            width={320}
+            height={320}
             alt={userToShow.name}
-            style={{ height: 180, width: 180 }}
           />
 
           <h3>{userToShow.name}</h3>
